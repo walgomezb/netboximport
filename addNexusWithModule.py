@@ -8,8 +8,8 @@ SDNET_MANAGEMENT_INTERFACE = "mgmtsdnet"
 MEGACABLE_TENANT = "megacable"
 
 targetDeviceType = "cisco-n9k-c9508"
-targetDeviceIp = "10.0.20.2/24"
-targetDeviceName = "Nexusc9508-test3"
+targetDeviceIp = "10.0.20.3/24"
+targetDeviceName = "Nexusc9508-test4"
 targetModuleType = "N9K-X97160YC-EX"
 slotTarget = "Slot 1"
 targetSite = "Site1"
@@ -44,7 +44,7 @@ device = nb.dcim.devices.create(
     site=nb.dcim.sites.get(name=targetSite).id,
     device_type=nb.dcim.device_types.get(slug=targetDeviceType).id,
     device_role=nb.dcim.device_roles.get(name=targetRole).id,
-    #agregar serial number
+    serial = "chasisSN12367576",
     status='active',
     )
 
@@ -78,7 +78,8 @@ moduleBayTarget = nb.dcim.module_bays.get(name=slotTarget, device_id=device.id)
 module = nb.dcim.modules.create(
     device = device.id,
     module_type=moduleTypeTarget.id,
-    module_bay = moduleBayTarget.id
+    module_bay = moduleBayTarget.id,
+    serial = "moduleSN12311234123"
 )
 
 interfaceEth1 = nb.dcim.interfaces.get(name="Ethernet1/1", device=targetDeviceName)
